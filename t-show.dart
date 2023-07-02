@@ -23,7 +23,7 @@ Future showToast(
       context: contexts,
       builder: (context) {
         Timer.periodic(Duration(seconds: seconds == 0 ? 3 : seconds), (timer) {
-          Navigator.of(contexts).pop(); //定时关闭
+          Navigator.of(contexts).pop();
           timer.cancel(); //关闭定时器
         });
 
@@ -199,7 +199,7 @@ Future<dynamic> showModalText(BuildContext contexts, String title, String text,
       context: contexts,
       builder: (context) {
         return Column(
-          mainAxisAlignment: MainAxisAlignment.center, //上下居中
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
               width: width,
@@ -215,7 +215,7 @@ Future<dynamic> showModalText(BuildContext contexts, String title, String text,
                 ),
               ),
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween, //均分
+                mainAxisAlignment: MainAxisAlignment.spaceBetween, 
                 children: [
                   Column(
                     children: [
@@ -264,7 +264,7 @@ Future<dynamic> showModalText(BuildContext contexts, String title, String text,
                     ],
                   ),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween, //均分排列
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween, 
                     children: [
                       TextButton(
                         child: Text(okName == "" ? '确认' : okName),
@@ -309,7 +309,7 @@ Future showLoading(BuildContext contexts, String title, String text) async {
       context: contexts,
       builder: (context) {
         return Column(
-          mainAxisAlignment: MainAxisAlignment.center, //居中
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Transform.scale(
               scale: 1.8,
@@ -359,23 +359,21 @@ Future<dynamic> showActionSheet(
     "index": index,
     "context": "",
   };
-  final size = MediaQuery.of(contexts).size; //获取屏幕
+  final size = MediaQuery.of(contexts).size;
   double heightx = (ArrList.length * 50);
   if (heightx > (size.height * 0.8)) {
     heightx = (size.height * 0.8);
   }
   try {
     return await showDialog(
-      barrierDismissible: true, //遮挡层点击
-      useSafeArea: false, //安全区
-      // useRootNavigator: false, //安全区
+      barrierDismissible: true,
       context: contexts,
       builder: (context) {
         return Container(
           height: heightx + 70,
           padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.end, //居中
+            mainAxisAlignment: MainAxisAlignment.end,
             mainAxisSize: MainAxisSize.min,
             children: [
               Column(
