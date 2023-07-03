@@ -1,18 +1,16 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 /* 
-  【Flutter 提示框组件】 2023-07-01 Linwute 开发 E-Mail: Linwute@tom.com
-  前端怎么那么难找工作呢？
+  【Flutter 提示框组件】 2023-07-01 开发者: Linwute  开发者E-Mail: Linwute@tom.com
+  消息提示框】  使用方式：showToast(context, 3, "标题", "内容");
+  显示模态弹窗】 使用方式：showModal(context, "标题", "内容", "确认", "关闭").then((index) => {});
+  显示模态弹窗2】 使用方式：showModal2(context, "标题", "内容", "确认", "关闭", "取消").then((index) => {});
+  显示模态弹窗3】 使用方式：showModal3(context, "标题", "内容", "确认", "关闭", "取消","退出").then((index) => {});
+  显示模态内容弹窗】 使用方式：showModalText(context, "标题", "提示内容", '输入内容', '输入框提示', '确认', '取消').then((value) {});
+  加载状态提示框】 使用方式： showLoading(context, "加载中...", "已上传（2/7）");
+  隐藏消息提示框】 使用方式： hideToast(context);
+  从底部向上弹出列表菜单】 使用方式：showActionSheet(context, "标题", ['aaaa', 'bbbb', 'cccc'], 1).then((res) => {});
 
-  消息提示框  使用方式：showToast(context, 3, "标题", "内容");
-  显示模态弹窗 使用方式：showModal(context, "标题", "内容", "确认", "关闭").then((index) => {});
-  显示模态弹窗2 使用方式：showModal2(context, "标题", "内容", "确认", "关闭", "取消").then((index) => {});
-  显示模态弹窗3 使用方式：showModal3(context, "标题", "内容", "确认", "关闭", "取消","退出").then((index) => {});
-  显示模态内容弹窗 使用方式：showModalText(context, "标题", "提示内容", '输入内容', '输入框提示', '确认', '取消').then((value) {});
-  加载状态提示框 使用方式： showLoading(context, "加载中...", "已上传（2/7）");
-  隐藏消息提示框 使用方式： hideToast(context);
-  从底部向上弹出列表菜单 使用方式：showActionSheet(context, "标题", ['aaaa', 'bbbb', 'cccc'], 1).then((res) => {});
-  
 */
 
 /* 显示消息提示框 */
@@ -23,7 +21,7 @@ Future showToast(
       context: contexts,
       builder: (context) {
         Timer.periodic(Duration(seconds: seconds == 0 ? 3 : seconds), (timer) {
-          Navigator.of(contexts).pop();
+          Navigator.of(contexts).pop(); //定时关闭
           timer.cancel(); //关闭定时器
         });
 
@@ -199,7 +197,7 @@ Future<dynamic> showModalText(BuildContext contexts, String title, String text,
       context: contexts,
       builder: (context) {
         return Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center, //上下居中
           children: [
             Container(
               width: width,
@@ -215,7 +213,7 @@ Future<dynamic> showModalText(BuildContext contexts, String title, String text,
                 ),
               ),
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween, //均分
                 children: [
                   Column(
                     children: [
@@ -265,7 +263,7 @@ Future<dynamic> showModalText(BuildContext contexts, String title, String text,
                     ],
                   ),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween, //均分排列
                     children: [
                       TextButton(
                         child: Text(okName == "" ? '确认' : okName),
@@ -310,7 +308,7 @@ Future showLoading(BuildContext contexts, String title, String text) async {
       context: contexts,
       builder: (context) {
         return Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center, //居中
           children: [
             Transform.scale(
               scale: 1.8,
@@ -360,21 +358,23 @@ Future<dynamic> showActionSheet(
     "index": index,
     "context": "",
   };
-  final size = MediaQuery.of(contexts).size;
+  final size = MediaQuery.of(contexts).size; //获取屏幕
   double heightx = (ArrList.length * 50);
   if (heightx > (size.height * 0.8)) {
     heightx = (size.height * 0.8);
   }
   try {
     return await showDialog(
-      barrierDismissible: true,
+      barrierDismissible: true, //遮挡层点击
+      useSafeArea: false, //安全区
+      // useRootNavigator: false, //安全区
       context: contexts,
       builder: (context) {
         return Container(
           height: heightx + 70,
           padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.end,
+            mainAxisAlignment: MainAxisAlignment.end, //居中
             mainAxisSize: MainAxisSize.min,
             children: [
               Column(
@@ -459,5 +459,23 @@ Future<dynamic> showActionSheet(
     return Future.value(Obj);
   } finally {
     return Future.value(Obj);
+  }
+}
+
+/* 自定义 异步返回 方法涵 */
+Future<bool> funShow(BuildContext contexts) async {
+  bool tfTap = false;
+
+  try {
+    return await showDialog(
+      context: contexts,
+      builder: (context) {
+        return Text("业务块");
+      },
+    );
+  } catch (e) {
+    return Future.value(tfTap);
+  } finally {
+    return Future.value(tfTap);
   }
 }
