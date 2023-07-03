@@ -215,7 +215,7 @@ Future<dynamic> showModalText(BuildContext contexts, String title, String text,
                 ),
               ),
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween, 
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Column(
                     children: [
@@ -253,6 +253,7 @@ Future<dynamic> showModalText(BuildContext contexts, String title, String text,
                             suffixIcon: IconButton(
                               onPressed: () {
                                 _controller.clear();
+                                Obj['context'] = '';
                               },
                               icon: const Icon(Icons.clear), //删除图标
                             ),
@@ -264,7 +265,7 @@ Future<dynamic> showModalText(BuildContext contexts, String title, String text,
                     ],
                   ),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween, 
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       TextButton(
                         child: Text(okName == "" ? '确认' : okName),
